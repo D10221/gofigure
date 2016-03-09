@@ -2,9 +2,9 @@ package main
 
 import (
     "fmt"
-    "github.com/D10221/gofigure/util"
+    "github.com/D10221/gofigure/inutil"
 )
 
 func main(){
-    fmt.Print(util.Nada())
+    fmt.Printf("Nada is '%s' ", &inutil.Thing{})
 }
