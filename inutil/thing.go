@@ -25,3 +25,7 @@ func (this *Thing) Equals(other *Thing) bool {
 	return this == other
 	// Output: true is they are the same "instance?"
 }
+
+type Anything interface {
+
+}
