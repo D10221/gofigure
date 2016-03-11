@@ -4,6 +4,14 @@ type Thing struct {
 	Name string
 }
 
+func (thing *Thing) IsEmpty() bool {
+	return thing.Name == ""
+}
+
+func (thing *Thing) IsNilOrEmpty() bool {
+	return thing == nil || thing.Name == ""
+}
+
 func (n *Thing) getName() string {
 	return n.Name
 }
@@ -26,6 +34,24 @@ func (this *Thing) Equals(other *Thing) bool {
 	// Output: true is they are the same "instance?"
 }
 
-type Anything interface {
+func IsThingNamed(name string) func(thing *Thing) bool {
+	f := func(thing *Thing) bool {
+		return thing.Name == name
+	}
+	return f
+}
 
+type Things []*Thing;
+
+func MakeThings(thing ...*Thing) Things {
+	return thing
+}
+
+func (this Things) FirstOrDefault(find func(t *Thing) bool) *Thing {
+	for _, thing := range this[:] {
+		if find(thing) {
+			return thing
+		}
+	}
+	return nil
 }

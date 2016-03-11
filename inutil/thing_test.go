@@ -123,5 +123,68 @@ func Test_MoreThings(t *testing.T) {
 			t.Logf("%v", thing)
 		}
 	}
+}
+
+func IsThingNamedX(anything Anything) bool {
+	thing, ok := anything.(Thing)
+	return (ok && thing.Name == "X")
+}
+
+func Test_FirstOrDefault(t *testing.T) {
+	things := []Anything{Thing{"X"}}
+	thing := FirstOrDefault(things, IsThingNamedX)
+	if thing == nil {
+		t.Error("Not Found")
+	}else {
+		t.Logf("found: %s", thing.(Thing).Name)
+	}
+	things = []Anything{Thing{"Y"}}
+	thing = FirstOrDefault(things, IsThingNamedX)
+	if thing != nil {
+		t.Error("???")
+	}
+	var _things Things = MakeThings(&Thing{"Z"})
+	if _things.FirstOrDefault(IsThingNamed("Z")).IsEmpty() {
+		t.Error("Wrong")
+	}
+	if !_things.FirstOrDefault(IsThingNamed("X")).IsNilOrEmpty() {
+		t.Error("Wrong")
+	}
 
 }
+
+func Test_IncrementNumbers(t *testing.T) {
+
+	numbersSource := []int{0, 1, 2}
+
+	increment := func(x *int) {
+		*x++
+	}
+
+	// Increment number in numbers ,
+	// while numbers is a value, a copy
+	// of the original slice,
+	// slice elements are pointers to the original value
+	// so.. original slice/array's elements will
+	// change... mutate accordingly
+	increments := func(numbers []int) {
+		for i := 0; i < len(numbers); i++ {
+			increment(&numbers[i])
+		}
+	}
+
+	increments(numbersSource)
+
+	if numbersSource[0] != 1 {
+		t.Error("DOesn't work")
+	}else {
+		t.Log(numbersSource)
+	}
+}
+
+
+
+
+
+
+
