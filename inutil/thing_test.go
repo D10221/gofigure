@@ -143,6 +143,7 @@ func Test_FirstOrDefault(t *testing.T) {
 	if thing != nil {
 		t.Error("???")
 	}
+	// Attached to Things
 	var _things Things = MakeThings(&Thing{"Z"})
 	if _things.FirstOrDefault(IsThingNamed("Z")).IsEmpty() {
 		t.Error("Wrong")

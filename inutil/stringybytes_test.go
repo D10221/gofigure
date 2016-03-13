@@ -43,4 +43,17 @@ func Test_Strings(t *testing.T) {
 		t.Error("!=", a, b)
 	}
 
+	if ReverseString("hello") != "olleh" {
+		t.Error("Doesn't work")
+	}
+
+}
+
+func ReverseString(s string) string {
+	runeCount := len([]rune(s))
+	out := make([]rune, runeCount)
+	for i, c := range s[:] {
+		out[runeCount - 1 - i] = c
+	}
+	return string(out)
 }

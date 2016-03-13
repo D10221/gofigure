@@ -12,5 +12,4 @@ func Test_maps(t *testing.T) {
 	if uno, exists := ones["uno"]; exists && uno == 1 {
 		t.Failed()
 	}
-
 }
