@@ -1,6 +1,6 @@
 package inutil
 
-func WaitForAction(action Action, callback Action) {
+func WaitThen(action Action, callback Action) {
 	done := make(chan bool)
 	go func() {
 		action()

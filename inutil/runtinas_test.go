@@ -94,7 +94,7 @@ func Test_Routinas(t *testing.T) {
 	// and wait again ...
 	actioned := false
 	calledBack := false
-	WaitForAction(
+	WaitThen(
 		// Anonymous Action
 		func() {
 			time.Sleep(time.Second)

@@ -7,10 +7,9 @@ import (
 )
 
 func main() {
-	done := make(chan bool)
 	actioned := false
 	calledBack := false
-	inutil.WaitForAction(done,
+	inutil.WaitThen(
 		// Anonymous Action
 		func() {
 			time.Sleep(time.Second)
@@ -23,7 +22,6 @@ func main() {
 			fmt.Print("Callback")
 		},
 	)
-	<-done
 	if !actioned || !calledBack {
 		fmt.Print("Actioned: %v, Calledback: %v   %v", actioned, calledBack, ":)")
 	}
